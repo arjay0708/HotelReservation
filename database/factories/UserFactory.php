@@ -2,43 +2,42 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
+     * The name of the factory's corresponding model.
+     *
+     * @var string
      */
-    protected static ?string $password;
+    protected $model = User::class;
 
     /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition(): array
+    public function definition()
     {
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ];
-    }
+        $birthday = $this->faker->dateTimeBetween('-70 years', '-18 years')->format('Y-m-d');
+        $age = (int)round(now()->diffInYears($birthday));
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return [
+            'photos' => $this->faker->imageUrl(),
+            'lastname' => $this->faker->lastName,
+            'firstname' => $this->faker->firstName,
+            'middlename' => $this->faker->lastName,
+            'email' => $this->faker->unique()->userName . '@gmail.com',
+            'phoneNumber' => '+639' . $this->faker->unique()->numerify('##########'), // Generates a random phone number with the +639 prefix
+            'birthday' => $birthday,
+            'age' => $age,
+            'password' => bcrypt('password'),
+            'is_active' => $this->faker->boolean,
+            'is_admin' => $this->faker->boolean,
+            'email_verified' => $this->faker->boolean,
+        ];
     }
 }
