@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class reasonDeclineModel extends Model
+class reasonDecline extends Model
 {
     use HasFactory;
 
     protected $guard = 'reasonDeclineModel';
 
-    protected $table = 'reasonDeclineTable';
+    protected $table = 'reason_decline_table';
     
     protected $guard_name = 'web';
 

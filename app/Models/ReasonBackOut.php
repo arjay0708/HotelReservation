@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class reasonBackOutModel extends Model
+class ReasonBackOut extends Model
 {
     use HasFactory;
 
     protected $guard = 'reasonBackOutModel';
 
-    protected $table = 'reasonBackOutTable';
+    protected $table = 'reason_back_out_table';
     
     protected $guard_name = 'web';
 
