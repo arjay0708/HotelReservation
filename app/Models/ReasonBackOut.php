@@ -28,4 +28,3 @@ class ReasonBackOut extends Model
     ];
 
 }
-
