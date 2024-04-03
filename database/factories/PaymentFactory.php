@@ -27,8 +27,6 @@ class PaymentFactory extends Factory
             'customer_email' => $this->faker->unique()->safeEmail,
             'payment_status' => $this->faker->randomElement(['pending', 'completed', 'failed']),
             'payment_method' => $this->faker->randomElement(['credit_card', 'paypal', 'bank_transfer']),
-            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }
