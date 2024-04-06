@@ -9,6 +9,8 @@ class Room extends Model
 {
     use HasFactory;
 
+    protected $table = 'roomTable';
+
     protected $fillable = [
         'photos',
         'room_number',

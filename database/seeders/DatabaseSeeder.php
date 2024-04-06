@@ -21,7 +21,11 @@ class DatabaseSeeder extends Seeder
         //]);
         $this->call([
             ReasonBackOutSeeder::class,
-            ReasonDeclineSeeder::class
+            ReasonDeclineSeeder::class,
+            RoomSeeder::class,
+            UserSeeder::class,
+            ReservationSeeder::class,
+            PaymentSeeder::class
         ]);
     }
 }
