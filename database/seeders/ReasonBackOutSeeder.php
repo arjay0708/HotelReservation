@@ -14,6 +14,6 @@ class ReasonBackOutSeeder extends Seeder
      */
     public function run()
     {
-        ReasonBackOut::factory(10)->create();
+        ReasonBackOut::factory(5)->create();
     }
 }

@@ -14,6 +14,6 @@ class PaymentSeeder extends Seeder
     public function run()
     {
         // Example data for payment table
-        Payment::factory()->count(10)->create();
+        Payment::factory()->count(5)->create();
 }
 }

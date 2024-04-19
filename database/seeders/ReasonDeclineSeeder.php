@@ -13,6 +13,6 @@ class ReasonDeclineSeeder extends Seeder
      */
     public function run(): void
     {
-        reasonDecline::factory(10)->create();
+        reasonDecline::factory(5)->create();
     }
 }
