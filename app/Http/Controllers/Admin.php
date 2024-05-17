@@ -115,7 +115,7 @@ class Admin extends Controller
                     'is_available' => 1
                     ]);
                     return response()->json($addRoom ? 1 : 0);
-                    exit();
+                    // exit();
                 }else{
                     return response()->json(2);
                 }
