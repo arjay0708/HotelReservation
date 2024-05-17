@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+* {
+    scroll-behavior: smooth;
+    border: 0;
+    box-sizing: border-box;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.navbar {
+    padding: 1rem 0 10px 0  !important;
+    background-color: #ffffff !important;
+    position: fixed !important;
+    z-index: 1;
+    width: 100%;
+}
+
+.mainBar .card-img-top {
+    height: 300px !important;
+}
+
+.navbar h4{
+    color:  #8d8a85 !important;
+    font-weight: bold;
+    letter-spacing: 1px !important;
+    font-size: 22px !important;
+}
+
+.navbar a{
+    color:  #8d8a85 !important;
+    font-weight: 500 !important;
+    letter-spacing: 1px !important;
+    font-size: 12px !important;
+}
+
+.navbar ul{
+    margin-right: 14rem !important;
+}
+
+.navbar button{
+    display: none;
+}
+
+#sidebar-wrapper{
+    height: 100%;
+    width: 210px;
+    position: fixed;
+    background-color: #ffff !important;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #403f3a;
+    padding-top: 20px;
+}
+
+#page-content-wrapper{
+    width: 100%;
+    margin-left: 210px;
+}
+
+#page-content-wrapper .mainBar{
+    padding-top: 5rem !important;
+}
+
+.scpiLogo {
+    text-align: center !important;
+    background-color: none !important;
+    width: 170px !important;
+    margin-top: -45px !important;
+}
+
+.portal {
+    background: transparent;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #8d8a85 !important;
+    font-weight: 500;
+}
+
+.mainBar .list-group-item{
+    line-height: 28px;
+}
+
+.recruiterLink .recruiterA {
+    text-align: start !important;
+    width: 209px;
+    border: 0.2px solid #f1f0f0;
+    letter-spacing: 1px;
+    font-size: 12px;
+    display: block !important;
+    padding: 22px 16px !important;
+    color: #403f3a !important;
+    font-weight: 400;
+    text-decoration: none;
+    transition: 0.2s linear;
+}
+
+.list-group-item i{
+    color: #8d8a85 !important;
+}
+
+#dateDisplay,
+#clockDisplay {
+    font-size: 12px;
+    color: #403f3a;
+    letter-spacing: 1px;
+}
+
+#logout , #applicantslogout{
+    font-size: 12px !important;
+    color: #8d8a85 !important;
+    border: none !important;
+}
+
+.noCoworkers{
+    margin-top: 14rem;
+}
+
+.mainBar, .form-control, .form-select, .form-label, th , td{
+    font-size: 14px !important;
+    color: #403f3a !important;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #403f3a;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #403f3a;
+  }
+
+    .mainBar .icons{
+        font-size:1rem;
+        background-color:#8d8a85;
+        padding:10px;
+        border:1px solid #8d8a85;
+        border-radius:50%;
+        color: #ffffff !important;
+    }
+
+    table tbody td{
+        vertical-align: baseline !important;
+    }
+
+@media (max-width: 900px) {
+    .navbar {
+        overflow-x: hidden !important;
+        width: 100%;
+    }
+
+    .noCoworkers{
+        margin-top: 4rem;
+    }
+
+    .res{
+        display: flex;
+        padding-bottom: 1rem;
+        width: 100%;
+    }
+
+    #sidebar-wrapper{
+        width: 60%;
+        /* position: relative !important;  */
+    }
+
+    #page-content-wrapper{
+        width: 100% !important;
+        margin-left:0 !important; /* Same as the width of the sidebar */
+    }
+
+    .navbar h4{
+        color:  #403f3a !important;
+        font-weight: bold;
+        letter-spacing: 1px !important;
+        font-size: 20px !important;
+    }
+
+    .navbar button{
+        color:  #403f3a;
+        display: block;
+    }
+
+    .scpiLogo{
+        margin-top: 1rem !important;
+    }
+
+    #dateDisplay,
+    #clockDisplay {
+        display: none !important;
+    }
+
+    .noSchedule{
+        margin: 15rem 0 0 1.6rem !important;
+        color: #403f3a !important;
+    }
+
+    /* width */
+    ::-webkit-scrollbar, ::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{
+        display: none;
+    }
+
+    .mainBar .icons{
+        font-size:4rem !important;
+        padding-top:0.8rem !important;
+        color:#403f3a !important;
+        border:0 !important;
+        border-radius:0 !important;
+        background-color: #ffffff;
+
+    }
+
+    .mainBar , .mainBar .form-control{
+        font-size: 16px !important;
+    }
+
+    .applicantNoSchedule{
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin-left: 7px !important;
+    }
+    .btn-close{
+        padding-left: 3rem !important;
+    }
+
+    .loader {
+        position: fixed;
+        top: 9.2%;
+        left: 0;
+        padding-left: 13rem;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        transition: opacity 0.1s, visibility 1.5s;
+        }
+}
