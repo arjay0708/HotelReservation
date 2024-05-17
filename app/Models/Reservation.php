@@ -9,9 +9,13 @@ class Reservation extends Model
 {
     use HasFactory;
 
+    protected $guard = 'reservationModel';
+
     protected $table = 'reservationTable';
 
-    protected $primaryKey = 'reservation_id';
+    protected $guard_name = 'web';
+
+    protected $primaryKey  = 'reservation_id';
 
     protected $fillable = [
         'book_code',
@@ -23,9 +27,7 @@ class Reservation extends Model
         'is_archived',
         'is_noted',
     ];
-
-    protected $casts = [
-        'start_dataTime' => 'datetime',
-        'end_dateTime' => 'datetime',
+    protected $hidden = [
+        'token',
     ];
 }

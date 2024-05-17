@@ -9,7 +9,13 @@ class Room extends Model
 {
     use HasFactory;
 
+    protected $guard = 'roomModel';
+
     protected $table = 'roomTable';
+    
+    protected $guard_name = 'web';
+
+    protected $primaryKey  = 'room_id';
 
     protected $fillable = [
         'photos',
@@ -19,7 +25,10 @@ class Room extends Model
         'number_of_bed',
         'details',
         'max_person',
-        'price',
+        'price_per_hour',
         'is_available',
+    ];
+    protected $hidden = [
+        'token',
     ];
 }
