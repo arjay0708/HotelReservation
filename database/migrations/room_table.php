@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('number_of_bed');
             $table->string('details');
             $table->string('max_person');
-            $table->float('price');
+            $table->float('price_per_hour');
             $table->integer('is_available');
             $table->timestamps();
         });
