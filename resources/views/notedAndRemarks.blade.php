@@ -31,7 +31,7 @@
                     <div class="container2">
                         <div class="nav-header">
                             <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-                            <h1 id="fh5co-logo"><a href="/harborView">Harbor View</a></h1>
+                            <h1 id="fh5co-logo"><a href="/harborView">HOSS</a></h1>
                             <nav id="fh5co-menu-wrap" role="navigation">
                                 <ul class="sf-menu" id="fh5co-primary-menu">
                                     <li><a class="active" href="/harborView">Home</a></li>
@@ -60,13 +60,13 @@
 
                                 <p style="color: #ffffff">Welcome to our Hotel Appointment System Notes And Remarks. This
                                     document outlines how
-                                    we, Harbor View Beach Resort, collect, use, disclose,
+                                    we, HOSS Beach Resort, collect, use, disclose,
                                     and protect your personal information. By using our services and providing your
                                     information, you consent to the practices described in
                                     this Notes And Remarks.</p>
 
                                 <h2 style="color: #ffffff">Compliance with Data Privacy Laws:</h2>
-                                <p style="color: #ffffff">Harbor View Beach Resort is committed to complying with
+                                <p style="color: #ffffff">HOTEL OPERATION SOLUTION SYSTEM is committed to complying with
                                     Republic Act No. 10173, also
                                     known as the "Data Privacy Act of 2012," and adhering to international data privacy
                                     standards.
@@ -80,7 +80,7 @@
                                     <br>
                                     <br>
 
-                                    The Harbor View Beach Resort places a strong emphasis on seclusion. We are dedicated
+                                    The HOSS Beach Resort places a strong emphasis on seclusion. We are dedicated
                                     to upholding the highest standards for the security and
                                     protection of personal data in order to gain and keep your trust. Regardless of the
                                     kind of reservations or contractual arrangement,
@@ -117,10 +117,10 @@
 
                                 <h2 style="color: #ffffff">Contact Information:</h2>
                                 <address>
-                                    <p style="color: #ffffff">Harbor View Beach Resort<br>
+                                    <p style="color: #ffffff">HOTEL OPERATION SOLUTION SYSTEM<br>
                                         123 Beachwood Side, Zambales<br>
-                                        Data Protection Officer: Noel John Ervas<br>
-                                        Email: <a>harborview@gmail.com</a></p>
+                                        Data Protection Officer: RYAN JOSHUA, BUENO<br>
+                                        Email: <a>HOSS@gmail.com</a></p>
                                 </address>
 
                                 <h2 style="color: #ffffff">Changes to Notes And Remarks:</h2>
@@ -150,8 +150,8 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="copyright">
-                                <p><small>&copy; 2023 Harbor View Beach Resort <br> All Rights Reserved. <br>
-                                        Designed by <a href="#" target="_blank">Vince & Reginald</a> <br> Block:
+                                <p><small>&copy; 2023 HOTEL OPERATION SOLUTION SYSTEM <br> All Rights Reserved. <br>
+                                        Designed by <a href="#" target="_blank">TEAM Synthetix</a> <br> Block:
                                         <a href="http://unsplash.com/" target="_blank">BSIT 3</a></small></p>
                             </div>
                         </div>

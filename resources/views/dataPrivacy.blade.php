@@ -31,7 +31,7 @@
                     <div class="container2">
                         <div class="nav-header">
                             <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-                            <h1 id="fh5co-logo"><a href="/harborView">Harbor View</a></h1>
+                            <h1 id="fh5co-logo"><a href="/harborView">HOTEL OPERATION SOLUTION SYSTEM</a></h1>
                             <nav id="fh5co-menu-wrap" role="navigation">
                                 <ul class="sf-menu" id="fh5co-primary-menu">
                                     <li><a class="active" href="/harborView">Home</a></li>
@@ -58,7 +58,7 @@
                             <div class="terms">
                                 <h1 style="color: #ffffff">Data Privacy for Hotel Appointment System</h1>
 
-                                <p style="color: #ffffff">Harbor View places a high priority on protecting your personal
+                                <p style="color: #ffffff">HOSS places a high priority on protecting your personal
                                     information by implementing strong organizational and technical controls. In
                                     compliance with relevant legal restrictions, we employ security mechanisms including
                                     firewalls and a user ID/password system to thwart unauthorized access, alteration,
@@ -101,7 +101,7 @@
 
                                 <h2 style="color: #ffffff">Internet Activities:</h2>
                                 <ul style="color: #ffffff">
-                                    <li>Connection to Harbor View websites (IP address, cookies following our Policy
+                                    <li>Connection to HOSS websites (IP address, cookies following our Policy
                                         about the
                                         use of tracers)</li>
                                     <li>Online forms (e.g., online reservations, questionnaires, interactions on Harbor
@@ -149,8 +149,8 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="copyright">
-                                <p><small>&copy; 2023 Harbor View Beach Resort <br> All Rights Reserved. <br>
-                                        Designed by <a href="#" target="_blank">Vince & Reginald</a> <br> Block:
+                                <p><small>&copy; 2024 HOTEL OPERATION SOLUTION SYSTEM <br> All Rights Reserved. <br>
+                                        Designed by <a href="#" target="_blank">TEAM: Synthetix</a> <br> Block:
                                         <a href="http://unsplash.com/" target="_blank">BSIT 3</a></small></p>
                             </div>
                         </div>
