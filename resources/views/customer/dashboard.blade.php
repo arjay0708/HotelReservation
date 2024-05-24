@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="col-9 text-center" style="line-height:19px; padding-top:1.5rem">
                                                 <p class="card-text fw-bold" style="font-size: 2rem; color:#8d8a85;" id="totalPendingReservation">0</p>
-                                                <p class="card-text fw-bold" style="font-size: 13px; color:#8d8a85;">PENDING RESERVATION</p>
+                                                <a class="card-text fw-bold" style=" text-decoration: none; cursor: pointer; font-size: 13px; color:#8d8a85;" href="/customerReservation">PENDING RESERVATION</a>
                                             </div>
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                             </div>
                                             <div class="col-9 text-center" style="line-height:19px; padding-top:1.4rem">
                                                 <p class="card-text fw-bold" style="font-size: 2rem; color:#8d8a85;" id="totalCancelReservation">0</p>
-                                                <p class="card-text fw-bold" style="font-size: 13px; color:#8d8a85;">CANCELLED RESERVATION</p>
+                                                <a class="card-text fw-bold" style=" text-decoration: none; cursor: pointer; font-size: 13px; color:#8d8a85;" href="/customerCancelReservation">CANCELLED RESERVATION</a>
                                             </div>
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@
                                             </div>
                                             <div class="col-9 text-center" style="line-height:19px; padding-top:1.4rem">
                                                 <p class="card-text fw-bold" style="font-size: 2rem; color:#8d8a85;" id="totalUnpaidReservation">0</p>
-                                                <p class="card-text fw-bold" style="font-size: 13px; color:#8d8a85;">UNPAID RESERVATION</p>
+                                                <a class="card-text fw-bold" style=" text-decoration: none; cursor: pointer; font-size: 13px; color:#8d8a85;" href="/customerUnpaidReservation">UNPAID RESERVATION</a>
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
                                             </div>
                                             <div class="col-9 text-center" style="line-height:19px; padding-top:1.4rem">
                                                 <p class="card-text fw-bold" style="font-size: 2rem; color:#8d8a85;" id="totalCompleteReservation">0</p>
-                                                <p class="card-text fw-bold" style="font-size: 13px; color:#8d8a85;">COMPLETED RESERVATION</p>
+                                                <a class="card-text fw-bold" style=" text-decoration: none; cursor: pointer; font-size: 13px; color:#8d8a85;" href="/customerCompleted">COMPLETED RESERVATION</a>
                                             </div>
                                         </div>
                                     </div>
