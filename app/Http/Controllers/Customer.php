@@ -66,69 +66,70 @@ class Customer extends Controller
     // SHOW ROOM FOR CUSTOMER
     public function getCustomerRoom(Request $request)
     {
-        $data = Room::where([['is_available', '!=', 0]])->orderBy('room_id')->get();
+        $data = Room::where('is_available', '!=', 0)->orderBy('room_id')->get();
+        
         if ($data->isNotEmpty()) {
             foreach ($data as $item) {
                 echo "
-                                <div class='col-lg-6 col-sm-12 g-0 gx-lg-5 text-center text-lg-start'>
-                                    <div class='card mb-3 shadow border-2 border rounded' style='width:100%'>
-                                        <div class='row g-0'>
-                                            <img loading='lazy' src='$item->photos' class='card-img-top img-thumdnail' style='height:230px; width:100%;' alt='ship'>
-                                            <div class='col-md-12'>
-                                                <ul class='list-group list-group-flush fw-bold'>
-                                                    <li class='list-group-item'>
-                                                        <div class='row'>
-                                                            <div class='col-12 col-lg-6 ps-0 ps-lg-4'>
-                                                                Room Number: <span class='fw-normal'> $item->room_number</span>
-                                                            </div>
-                                                            <div class='col-12 col-lg-6 pt-2 pt-lg-0 ps-0 ps-lg-4'>
-                                                                Room Floor:<span class='fw-normal'> $item->floor</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class='list-group-item'>
-                                                        <div class='row'>
-                                                            <div class='col-12 col-lg-6 ps-0 ps-lg-4'>
-                                                                Type of Room: <span class='fw-normal'>$item->type_of_room</span>
-                                                            </div>
-                                                            <div class='col-12 col-lg-6 pt-2 pt-lg-0 ps-0 ps-lg-4'>
-                                                                Number of Bed:<span class='fw-normal'> $item->number_of_bed Only</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class='list-group-item'>
-                                                        <div class='row'>
-                                                            <div class='col-12 col-lg-6 ps-0 ps-lg-4'>
-                                                                Max Person: <span class='fw-normal'>$item->max_person People Only</span>
-                                                            </div>
-                                                            <div class='col-12 col-lg-6 pt-2 pt-lg-0 ps-0 ps-lg-4'>
-                                                                Price Per Night(s): <span class='fw-normal'> ₱$item->price_per_hour.00</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class='list-group-item fw-bold' style='color:#'>
-                                                        <div class='col-12'>
-                                                            Details: <span class='fw-normal'>$item->details</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class='list-group-item text-center text-lg-end py-2'>
-                                                        <button onclick='bookReservation($item->room_id)' type='button' class='btn btn-sm btn-dark px-4 py-2 rounded-0'>BOOK NOW</button>
-                                                    </li>
-                                                </ul>
+                    <div class='col-lg-6 col-sm-12 g-0 gx-lg-5 text-center text-lg-start'>
+                        <div class='card mb-3 shadow border-2 border rounded' style='width:100%'>
+                            <div class='row g-0'>
+                                <img loading='lazy' src='" . asset($item->photos) . "' class='card-img-top img-thumdnail' style='height:230px; width:100%;' alt='Room Image'>
+                                <div class='col-md-12'>
+                                    <ul class='list-group list-group-flush fw-bold'>
+                                        <li class='list-group-item'>
+                                            <div class='row'>
+                                                <div class='col-12 col-lg-6 ps-0 ps-lg-4'>
+                                                    Room Number: <span class='fw-normal'> $item->room_number</span>
+                                                </div>
+                                                <div class='col-12 col-lg-6 pt-2 pt-lg-0 ps-0 ps-lg-4'>
+                                                    Room Floor:<span class='fw-normal'> $item->floor</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </li>
+                                        <li class='list-group-item'>
+                                            <div class='row'>
+                                                <div class='col-12 col-lg-6 ps-0 ps-lg-4'>
+                                                    Type of Room: <span class='fw-normal'>$item->type_of_room</span>
+                                                </div>
+                                                <div class='col-12 col-lg-6 pt-2 pt-lg-0 ps-0 ps-lg-4'>
+                                                    Number of Bed:<span class='fw-normal'> $item->number_of_bed Only</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class='list-group-item'>
+                                            <div class='row'>
+                                                <div class='col-12 col-lg-6 ps-0 ps-lg-4'>
+                                                    Max Person: <span class='fw-normal'>$item->max_person People Only</span>
+                                                </div>
+                                                <div class='col-12 col-lg-6 pt-2 pt-lg-0 ps-0 ps-lg-4'>
+                                                    Price Per Night(s): <span class='fw-normal'> ₱$item->price_per_hour.00</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class='list-group-item fw-bold' style='color:#'>
+                                            <div class='col-12'>
+                                                Details: <span class='fw-normal'>$item->details</span>
+                                            </div>
+                                        </li>
+                                        <li class='list-group-item text-center text-lg-end py-2'>
+                                            <button onclick='bookReservation($item->room_id)' type='button' class='btn btn-sm btn-dark px-4 py-2 rounded-0'>BOOK NOW</button>
+                                        </li>
+                                    </ul>
                                 </div>
-                            ";
+                            </div>
+                        </div>
+                    </div>
+                ";
             }
         } else {
             echo "
-                        <div class='row applicantNoSchedule' style='margin-top:20rem; color: #8d8a85;'>
-                            <div class='alert alert-light text-center fs-4' role='alert' style='color: #8d8a85;'>
-                                NO ROOM AVAILABLE
-                            </div>
-                        </div>
-                        ";
+                <div class='row applicantNoSchedule' style='margin-top:20rem; color: #8d8a85;'>
+                    <div class='alert alert-light text-center fs-4' role='alert' style='color: #8d8a85;'>
+                        NO ROOM AVAILABLE
+                    </div>
+                </div>
+            ";
         }
     }
     
