@@ -168,7 +168,7 @@ $(document).ready(function(){
             $('#roomBedNumber').val(response.number_of_bed)
             $('#roomMaxPerson').val(response.max_person)
             $('#detailsOfRoom').val(response.details)
-            $('#roomPhoto').attr("src",response.photos)
+            $('#roomPhotos').attr("src",response.photos)
         })
     }
 

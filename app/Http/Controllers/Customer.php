@@ -13,6 +13,7 @@ use App\Models\reasonBackOutModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 
 class Customer extends Controller
@@ -72,7 +73,7 @@ class Customer extends Controller
                                 <div class='col-lg-6 col-sm-12 g-0 gx-lg-5 text-center text-lg-start'>
                                     <div class='card mb-3 shadow border-2 border rounded' style='width:100%'>
                                         <div class='row g-0'>
-                                            <img loading='lazy' src=$item->photos class='card-img-top img-thumdnail' style='height:230px; width:100%;' alt='ship'>
+                                            <img loading='lazy' src='$item->photos' class='card-img-top img-thumdnail' style='height:230px; width:100%;' alt='ship'>
                                             <div class='col-md-12'>
                                                 <ul class='list-group list-group-flush fw-bold'>
                                                     <li class='list-group-item'>
@@ -130,56 +131,83 @@ class Customer extends Controller
                         ";
         }
     }
-
-    // BOOK RESERVATION
+    
     public function bookReservation(Request $request)
-    {
-        $checkInDateTime = Carbon::parse($request->checkInDate . '14:00:00');
+{
+    // Validate request data
+    $validatedData = $request->validate([
+        'checkInDate' => 'required|date',
+        'checkInTime' => 'required|date_format:H:i',
+        'checkOutDate' => 'required|date',
+        'checkOutTime' => 'required|date_format:H:i',
+        'roomId' => 'required|integer|exists:roomTable,room_id',
+    ]);
+
+    try {
+        // Parsing date and time
+        $checkInDateTime = Carbon::parse($validatedData['checkInDate'] . ' ' . $validatedData['checkInTime']);
+        $checkOutDateTime = Carbon::parse($validatedData['checkOutDate'] . ' ' . $validatedData['checkOutTime']);
+
+        // Formatting datetime
         $formattedCheckIn = $checkInDateTime->format('Y-m-d H:i:s');
-        $checkOutDateTime = Carbon::parse($request->checkOutDate . '12:00:00');
         $formattedCheckOut = $checkOutDateTime->format('Y-m-d H:i:s');
 
+        // Current datetime
         $currentDateTime = now()->format('Y-m-d H:i:s');
-        $random = Carbon::now()->format('YmdHis') . rand(001, 999);
 
+        // Generating random booking code
+        $random = Carbon::now()->format('YmdHis') . rand(100, 999);
+
+        // Fetching authenticated user
         $user = auth()->guard('userModel')->user();
 
+        // Checking user details completeness
         if (empty($user->lastname) || empty($user->firstname)) {
-            return response()->json(5);
+            return response()->json(['status' => 5, 'message' => 'User details incomplete']);
         }
 
-        $existingReservation = Reservation::where('room_id', $request->roomId)
+        // Checking if check-out datetime is before check-in datetime
+        if ($formattedCheckOut <= $formattedCheckIn) {
+            return response()->json(['status' => 3, 'message' => 'Invalid Check Out']);
+        }
+
+        // Ensuring check-in is in the future
+        if ($currentDateTime >= $formattedCheckIn) {
+            return response()->json(['status' => 4, 'message' => 'Check-in time must be in the future']);
+        }
+
+        // Checking for existing reservations
+        $existingReservation = Reservation::where('room_id', $validatedData['roomId'])
             ->where('status', 'Pending')
-            ->where(function ($query) use ($user, $formattedCheckIn, $formattedCheckOut) {
+            ->where(function ($query) use ($formattedCheckIn, $formattedCheckOut) {
                 $query->where(function ($query) use ($formattedCheckIn, $formattedCheckOut) {
-                    $query->where(function ($query) use ($formattedCheckIn, $formattedCheckOut) {
-                        $query->where('start_dataTime', '<', $formattedCheckOut)
-                            ->where('end_dateTime', '>', $formattedCheckIn);
-                    })
-                        ->orWhere(function ($query) use ($formattedCheckIn, $formattedCheckOut) {
-                            $query->where('start_dataTime', $formattedCheckIn)
-                                ->where('end_dateTime', $formattedCheckOut);
-                        });
+                    $query->where('start_dataTime', '<', $formattedCheckOut)
+                          ->where('end_dateTime', '>', $formattedCheckIn);
                 });
             })
             ->exists();
 
         if ($existingReservation) {
-            return response()->json(6);
+            return response()->json(['status' => 6, 'message' => 'Room is already booked for the selected time']);
         }
 
-        if ($currentDateTime > $formattedCheckIn) {
-            return response()->json(4);
-        } elseif ($formattedCheckIn == $formattedCheckOut) {
-            return response()->json(2);
-        } elseif ($formattedCheckOut < $formattedCheckIn) {
-            return response()->json(3);
-        }
+        // Log reservation data before creating it
+        Log::info('Creating reservation with data:', [
+            'book_code' => $random,
+            'user_id' => $user->user_id,
+            'room_id' => $validatedData['roomId'],
+            'start_dataTime' => $formattedCheckIn,
+            'end_dateTime' => $formattedCheckOut,
+            'status' => 'Unpaid',
+            'is_archived' => 0,
+            'is_noted' => 0
+        ]);
 
+        // Creating new reservation
         $bookRoom = Reservation::create([
             'book_code' => $random,
             'user_id' => $user->user_id,
-            'room_id' => $request->roomId,
+            'room_id' => $validatedData['roomId'],
             'start_dataTime' => $formattedCheckIn,
             'end_dateTime' => $formattedCheckOut,
             'status' => 'Unpaid',
@@ -190,9 +218,18 @@ class Customer extends Controller
         if ($bookRoom) {
             return response()->json(['status' => 1, 'book_code' => $bookRoom->book_code]);
         } else {
-            return response()->json(['status' => 0]);
+            return response()->json(['status' => 0, 'message' => 'Booking creation failed']);
         }
+    } catch (\Exception $e) {
+        // Detailed error logging
+        Log::error('Error in bookReservation: ' . $e->getMessage(), [
+            'exception' => $e,
+            'request_data' => $request->all()
+        ]);
+        return response()->json(['status' => 0, 'message' => 'An unexpected error occurred']);
     }
+}
+    
 
     public function payment($book_code)
     {
@@ -213,6 +250,8 @@ class Customer extends Controller
             )->get();
         return view('customer/payment', compact('data'));
     }
+
+    
 
     // PENDING RESERVATION PER USER
     public function getBookPerUser(Request $request)
@@ -278,8 +317,8 @@ class Customer extends Controller
                                                     <li class='list-group-item'>
                                                         <div class='row'>
                                                             <div class='col-12 col-lg-7 ps-0 ps-lg-4'>
-                                                                Check In: <span class='fw-normal'> $checkInDateTime - 02:00 PM</span><br>
-                                                                Check Out:<span class='fw-normal'> $checkOutDateTime - 12:00 PM</span>
+                                                                Check In: <span class='fw-normal'> $checkInDateTime </span><br>
+                                                                Check Out:<span class='fw-normal'> $checkOutDateTime </span>
                                                             </div>
                                                             <div class='col-12 col-lg-5 pt-2 pt-lg-0 ps-0 ps-lg-4'>
                                                                 Total Night(s): <span class='fw-normal'> $totalNights</span><br>
@@ -392,8 +431,8 @@ class Customer extends Controller
                                                 <li class='list-group-item'>
                                                     <div class='row'>
                                                         <div class='col-12 col-lg-7 ps-0 ps-lg-4'>
-                                                            Check In: <span class='fw-normal'> $checkInDateTime - 02:00 PM</span><br>
-                                                            Check Out:<span class='fw-normal'> $checkOutDateTime - 12:00 PM</span>
+                                                            Check In: <span class='fw-normal'> $checkInDateTime </span><br>
+                                                            Check Out:<span class='fw-normal'> $checkOutDateTime </span>
                                                         </div>
                                                         <div class='col-12 col-lg-5 pt-2 pt-lg-0 ps-0 ps-lg-4'>
                                                             Total Night(s): <span class='fw-normal'> $totalNights</span><br>
@@ -493,8 +532,8 @@ class Customer extends Controller
                                         <li class='list-group-item'>
                                             <div class='row'>
                                                 <div class='col-12 col-lg-7 ps-0 ps-lg-4'>
-                                                    Check In: <span class='fw-normal'> $checkInDateTime - 02:00 PM</span><br>
-                                                    Check Out:<span class='fw-normal'> $checkOutDateTime - 12:00 PM</span>
+                                                    Check In: <span class='fw-normal'> $checkInDateTime </span><br>
+                                                    Check Out:<span class='fw-normal'> $checkOutDateTime </span>
                                                 </div>
                                                 <div class='col-12 col-lg-5 pt-2 pt-lg-0 ps-0 ps-lg-4'>
                                                     Total Night(s): <span class='fw-normal'> $totalNights</span><br>
@@ -718,9 +757,9 @@ class Customer extends Controller
 
     // UPDATE UNPAID RESERVATION
     public function updateUnpaidReservation(Request $request){
-        $checkInDateTime = Carbon::parse($request->checkInDate . '14:00:00');
+        $checkInDateTime = Carbon::parse($request->checkInDate );
         $formattedCheckIn = $checkInDateTime->format('Y-m-d H:i:s');
-        $checkOutDateTime = Carbon::parse($request->checkOutDate . '12:00:00');
+        $checkOutDateTime = Carbon::parse($request->checkOutDate );
         $formattedCheckOut = $checkOutDateTime->format('Y-m-d H:i:s');
 
         $currentDateTime = now()->format('Y-m-d H:i:s');
@@ -773,4 +812,5 @@ class Customer extends Controller
     }
 
     // FUNCTION
+    
 }

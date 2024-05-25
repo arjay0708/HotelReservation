@@ -101,7 +101,7 @@ Route::get('/cancel', [Stripe::class, 'cancel'])->name('cancel');
 
 // FUNCTION
 Route::get('/getCustomerRoom', [Customer::class, 'getCustomerRoom'])->name('getCustomerRoom');
-Route::post('/bookReservation', [Customer::class, 'bookReservation'])->name('bookReservation');
+Route::post('/bookReservation', [Customer::class, 'bookReservation']);
 Route::get('/cancelReservation', [Customer::class, 'cancelReservation'])->name('cancelReservation');
 Route::get('/getBookPerUser', [Customer::class, 'getBookPerUser'])->name('getBookPerUser');
 Route::get('/getAcceptBookPerUser', [Customer::class, 'getAcceptBookPerUser'])->name('getAcceptBookPerUser');

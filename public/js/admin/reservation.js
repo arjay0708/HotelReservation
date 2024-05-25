@@ -4,7 +4,6 @@ $(document).ready(function(){
     cancelledReservationTable();
     unpaidReservationTable();
     completedReservationTable();
-    checkCancelledReservation();
     unattendedReservationTable();
     $.ajaxSetup({
         headers: {
@@ -505,24 +504,24 @@ $(document).ready(function(){
             });
     }
 
- // CHECK CANCELLED RESERVATION
-    function checkCancelledReservation(){
-        $.ajax({
-            url: '/checkCancelledReservation',
-            type: 'GET',
-            dataType: 'json',
-        })
-        .done(function(response) {
-            if(response === 1){
-                Swal.fire({
-                    position: "top-center",
-                    icon: "warning",
-                    title: "SOMEONE CANCELLED THEIR BOOKING",
-                    footer: '<a href="/adminCancelledReservation">REDIRECT TO CANCELLED RESERVATION PAGE?</a>'
-                });
-            }
-        })
-    }
+//  // CHECK CANCELLED RESERVATION
+//     function checkCancelledReservation(){
+//         $.ajax({
+//             url: '/checkCancelledReservation',
+//             type: 'GET',
+//             dataType: 'json',
+//         })
+//         .done(function(response) {
+//             if(response === 1){
+//                 Swal.fire({
+//                     position: "top-center",
+//                     icon: "warning",
+//                     title: "SOMEONE CANCELLED THEIR BOOKING",
+//                     footer: '<a href="/adminCancelledReservation">REDIRECT TO CANCELLED RESERVATION PAGE?</a>'
+//                 });
+//             }
+//         })
+//     }
 
 // NOT ATTENDED RESERVATION
     function unAttendedReservation(reservationId , roomId){

@@ -251,12 +251,12 @@ class Admin extends Controller
             }
 
             public function getAllUnattendedReservation(Request $request){
-                $data = Reservation::join('roomTable', 'reservationTable.room_id', '=', 'roomTable.room_id')
-                ->join('userTable', 'reservationTable.user_id', '=', 'userTable.user_id')
-                ->where([['reservationTable.status', '=', 'UnAttended']])->orderBy('reservationTable.reservation_id', 'ASC')
+                $data = Reservation::join('roomTable', 'reservationtable.room_id', '=', 'roomTable.room_id')
+                ->join('userTable', 'reservationtable.user_id', '=', 'userTable.user_id')
+                ->where([['reservationtable.status', '=', 'UnAttended']])->orderBy('reservationtable.reservation_id', 'ASC')
                 ->select(
                     'reservationTable.reservation_id','userTable.user_id','userTable.lastname','userTable.firstname','userTable.middlename','userTable.extention',
-                    'roomTable.room_id', 'roomTable.room_number','roomTable.floor','roomTable.price_per_hour','reservationTable.start_dataTime','reservationTable.end_dateTime',
+                    'roomTable.room_id', 'roomTable.room_number','roomTable.floor','roomTable.price_per_hour','reservationtable.start_dataTime','reservationtable.end_dateTime',
                 )->orderBy('reservationTable.end_dateTime' , 'ASC')->get();
                 foreach ($data as $reservation) {
                     $startDateTime = Carbon::parse($reservation->start_dataTime);
@@ -270,18 +270,21 @@ class Admin extends Controller
                 return response()->json($data);
             }
 
-            // NOT ATTEND RESERVATION
             public function unAttendedReservation(Request $request){
-                date_default_timezone_set('Asia/Manila');
-                $currentDate = date('m-d-Y h:i A', strtotime(now()));
-                $data = Reservation::where([['reservation_id', '=', $request->reservationId]])->first();
-                $checkInDateTime = date('m-d-Y h:i A',strtotime($data->start_dataTime));
-                $checkOutDateTime = date('m-d-Y h:i A',strtotime($data->end_dateTime));
-                if($currentDate >= $checkInDateTime && $currentDate <= $checkOutDateTime){
-                    $ongoingReservation = Reservation::where([['reservation_id', '=', $request->reservationId]])->update(['status' => 'UnAttended']);
-                    return response()->json($ongoingReservation ? 1 : 0);
-                }else{
-                    return response()->json(2);
+                // Fetch the reservation data
+                $reservation = Reservation::find($request->reservationId);
+            
+                // Check if the reservation exists
+                if($reservation) {
+                    // Update the reservation status to "UnAttended"
+                    $reservation->status = 'UnAttended';
+                    $reservation->save();
+            
+                    // Return success response
+                    return response()->json(1);
+                } else {
+                    // If the reservation does not exist, return failure response
+                    return response()->json(0);
                 }
             }
 
@@ -417,10 +420,10 @@ class Admin extends Controller
             }
 
             // CHECK CANCELLED RESERVATION
-            public function checkCancelledReservation(Request $request) {
-                $check = Reservation::where([['status', '=', 'Cancel'],['is_noted', '=', 0]])->get();
-                return response()->json($check->count() > 0 ? 1 : 0);
-            }
+            // public function checkCancelledReservation(Request $request) {
+            //     $check = Reservation::where([['status', '=', 'Cancel'],['is_noted', '=', 0]])->get();
+            //     return response()->json($check->count() > 0 ? 1 : 0);
+            // }
 
             // FUNCTION FOR CHART
             public function paymentGraph(Request $request){

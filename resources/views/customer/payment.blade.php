@@ -74,10 +74,10 @@
                                                 <li class="list-group-item fw-bold">Details: <span class="fw-normal">
                                                         {{ $item->details }}</span> </li>
                                                 <li class="list-group-item fw-bold">Check In: <span
-                                                        class="fw-normal">{{ \Carbon\Carbon::parse($item->start_dataTime)->format('F d, Y - 02:00 A') }}</span>
+                                                        class="fw-normal">{{ \Carbon\Carbon::parse($item->start_dataTime)->format('F d, Y ) }}</span>
                                                 </li>
                                                 <li class="list-group-item fw-bold">Check Out: <span
-                                                        class="fw-normal">{{ \Carbon\Carbon::parse($item->end_dateTime)->format('F d, Y - 12:00 A') }}</span>
+                                                        class="fw-normal">{{ \Carbon\Carbon::parse($item->end_dateTime)->format('F d, Y ) }}</span>
                                                 </li>
                                                 <li class="list-group-item fw-bold">Total Night(s):<span
                                                         class="fw-normal">
