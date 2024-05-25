@@ -352,7 +352,7 @@ class Customer extends Controller
     public function getCancelBookPerUser(Request $request)
     {
         $data = Reservation::join('roomTable', 'reservationTable.room_id', '=', 'roomTable.room_id')
-            ->join('reasonBackOutTable', 'reservationTable.reservation_id', '=', 'reasonBackOutTable.reservation_id')
+            ->join('reason_back_out_table', 'reservationTable.reservation_id', '=', 'reason_back_out_table.reservation_id')
             ->where(
                 [['reservationTable.status', '=', 'Cancel'], ['reservationTable.user_id', '=', auth()->guard('userModel')->user()->user_id]]
             )->orderBy('reservationTable.reservation_id', 'ASC')
@@ -369,10 +369,10 @@ class Customer extends Controller
                 'reservationTable.book_code',
                 'reservationTable.start_dataTime',
                 'reservationTable.end_dateTime',
-                'reasonBackOutTable.reason',
-                'reasonBackOutTable.updated_at',
+                'reason_back_out_table.reason',
+                'reason_back_out_table.updated_at',
             )
-            ->orderBy('reasonBackOutTable.updated_at', 'ASC')->get();
+            ->orderBy('reason_back_out_table.updated_at', 'ASC')->get();
         if ($data->isNotEmpty()) {
             foreach ($data as $item) {
                 $currentDateTime = Carbon::now()->format('F d, Y g:i A');
@@ -388,6 +388,7 @@ class Customer extends Controller
 
                 $totalPayment = $totalNights * $item->price_per_hour;
                 echo "
+
                         <div class='col-lg-6 col-sm-12 g-0 gx-lg-5 text-center text-lg-start'>
                             <div class='card mb-3 shadow border-2 border rounded' style='width:100%'>
                                     <div class='row g-0'>

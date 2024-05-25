@@ -380,8 +380,8 @@ class Admin extends Controller
                 return response()->json(1);
             }
 
-            // FETCH THE CANCELLED REASON
-            public function viewReasonCancelled(Request $request){
+            // FETCH THE  REASON
+            public function viewReason(Request $request){
                 $data = ReasonBackOut::where([['reservation_id', '=', $request->reservationId]])->select('reason','created_at')->first();
                 $formattedCreatedAt = Carbon::parse($data->created_at)->format('Y-m-d ');
                 $data->created_at = $formattedCreatedAt;
@@ -419,7 +419,7 @@ class Admin extends Controller
                 return response()->json(1);
             }
 
-            // CHECK CANCELLED RESERVATION
+            // CHECK  RESERVATION
             // public function checkCancelledReservation(Request $request) {
             //     $check = Reservation::where([['status', '=', 'Cancel'],['is_noted', '=', 0]])->get();
             //     return response()->json($check->count() > 0 ? 1 : 0);
