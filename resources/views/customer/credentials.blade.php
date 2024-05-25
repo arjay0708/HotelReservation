@@ -64,13 +64,13 @@
                                         </div>
                                         <div class="col-3">
                                             <div class="mb-3">
-                                            <label class="form-label">New Password:</label>
+                                            <label class="form-label">New Password: <span style="color: red">Must Be 8 characters</span></label>
                                                 <input required class="form-control shadow-sm rounded-0" type="text" id="userNewPassword" name="userNewPassword">
                                             </div>
                                         </div>
                                         <div class="col-3">
                                             <div class="mb-3">
-                                            <label class="form-label">Confirm Password:</label>
+                                            <label class="form-label">Confirm Password: <span style="color: red">Must Be 8 characters</span></label>
                                                 <input required class="form-control shadow-sm rounded-0" type="text" id="userNewConfirmPassword" name="userNewConfirmPassword">
                                             </div>
                                         </div>
